@@ -1,8 +1,7 @@
 ## whoami
 I am Manikesh, I love to play CTFs,Pentest Web-applications,APIs and container security.
-- Currently I am learning Golang and tweaking Web-applications.
-Other than Security and development, I love Playing PC Games,watch shows,anime,movies. 
-Sometimes I also read Books.
+Currently I am learning Golang and tweaking Web-applications.
+Other than Security and development, I love Playing PC Games,watch shows,anime,movies,Sometimes I also read Books.
 
 This days i am also trying to touch Grass and make some friends :P
 
