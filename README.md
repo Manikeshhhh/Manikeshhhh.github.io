@@ -31,20 +31,22 @@ Next day, I built the courage to test the features of main application again, I 
 2 other users to orgnization. so I tried to Bypass it and I was successfull by passing user parameter as an array while inviting because of which i was able to bypass the Limit, I also tried some other Jutsu's too to bypass but this was only working way.
 
 The request body looked like this
-'''
+```
 {"scope":"xxxx","user":"xxxx@xxx.com","roles":["xxx.User"]}
 I tried passing user parameter as an array and it worked
 {"scope":"xxxx","user":["xxxx@xxx.com","xxx2@xxx.com","xxx3@xx.com"],"roles":["xxx.User"]}
-'''
+```
 I thought not to report this issue because i was pretty sure this would be duplicate and It was already 3am so i thought to Get some sleep and try to find some new assets tomorrow.
 
 the next day, I logged in to the lower privilege user can tried if i could see the Owner data and thankfully I was able to see, I saw some new fields so I thought to pass those fields during adding and new User and voilla!!,just like that I took over the organizaion as the lowest privilege users.
 
 so i added some extra data with the request body, you can see below
-'''
+```
+I changed from
+{"scope":"xxxx","user":"xxxx@xxx.com","roles":["xxx.User"]}
+to this
 {"scope":"xxx","user":"xxx@xx.com","roles":["xxxx.Creator","xxxx.Owner"]}
-'''
-
+```
 Thank you for taking your time to read my Blog,
 This was it. If you liked the blog,you can follow me on my handles.
 
