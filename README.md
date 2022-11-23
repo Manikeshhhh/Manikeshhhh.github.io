@@ -38,7 +38,7 @@ I tried passing user parameter as an array and it worked
 ```
 I thought not to report this issue because i was pretty sure this would be duplicate and It was already 3am so i thought to Get some sleep and try to find some new assets tomorrow.
 
-the next day, I logged in to the lower privilege user can tried if i could see the Owner data and thankfully I was able to see, I saw some new fields so I thought to pass those fields during adding and new User and voilla!!,just like that I took over the organizaion as the lowest privilege users.
+the next day, I logged into the lower privilege user and tried if i could see the Owner data and thankfully I was able to see, I saw some new fields so I thought to pass those fields during adding and new User and voilla!!,just like that I took over the organizaion as the lowest privilege users.
 
 so i added some extra data with the request body, you can see below
 ```
