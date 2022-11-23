@@ -5,7 +5,7 @@ Other than Security and development, I love Playing PC Games,watch shows,anime,m
 
 This days i am also trying to touch Grass and make some friends :P
 
-### privilege escalation to Owner of the Org  
+### privilege escalation from User to Owner due to Mass assignment issue   
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
 
