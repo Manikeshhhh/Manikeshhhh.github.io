@@ -1,8 +1,8 @@
-## Aapka shwagat hai
-
-You can use the [editor on GitHub](https://github.com/tonyflo/demo/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## whoami
+I am Manikesh, I love to play CTFs,Pentest Web-applications,APIs and container security.
+- Currently I am learning Golang and tweaking Web-applications.
+Other than Security and development, I love Playing PC Games,watch shows,anime,movies. 
+Sometimes I also read Books.
 
 ### Markdown
 
