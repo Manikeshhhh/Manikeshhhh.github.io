@@ -6,7 +6,9 @@ Other than Security and development, I love Playing PC Games,watch shows,anime,m
 This days i am also trying to touch Grass and make some friends :P
 
 I will mainly be using this space to Publish Security research and writeup's
-### 1. privilege escalation from User to Owner due to Mass assignment issue   
+### 1. privilege escalation from User to Owner due to Mass assignment issue 
+**Published on 23-Nov-2023**
+
 This is a issue I found few months back on a program which was sadly duplicate.
 
 ### Description
