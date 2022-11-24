@@ -1,3 +1,6 @@
+title: privilege escalation from User to Owner due to Mass assignment issue
+published: true
+
 ## whoami
 I am Manikesh, I love to play CTFs,Pentest Web-applications,APIs and container security.
 Currently I am learning Golang(Trying to build some Appsec tools) and tweaking Web-applications.
