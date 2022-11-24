@@ -15,7 +15,7 @@ I will mainly be using this space to Publish Security research and writeup's
 <ul>
     {% for post in paginator.posts %}
       <li>
-          <h3><a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">{{ post.title }}</a></h3>
+          <h4><a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">{{ post.title }}</a></h4>
           <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
           <p>{{ post.content | strip_html | truncatewords:50 }}</p>
       </li>
