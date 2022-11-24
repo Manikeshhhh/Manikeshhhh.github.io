@@ -47,8 +47,14 @@ I changed from
 to this
 {"scope":"xxx","user":"xxx@xx.com","roles":["xxxx.Creator","xxxx.Owner"]}
 ```
+### takeaway 
+Maybe, spend some more time on the target, you might end up finding something interest
+
+
 Thank you for taking your time to read my Blog,
 This was it. If you liked the blog,you can follow me on my handles.
+
+
 
 ## Contact 
 [Instagram](https://www.instagram.com/manikeshh/)  [Twitter](https://twitter.com/X71n0/)  [Github](https://github.com/Manikeshhhh)
