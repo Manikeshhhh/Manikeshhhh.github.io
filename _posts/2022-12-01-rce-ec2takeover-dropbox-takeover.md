@@ -17,7 +17,7 @@ I grep subdomains from here first then I use ffuf to bruteforce some new domains
 ```
 root@x71n0:~$ ffuf -u https://FUZZ.xxxx.com -w bruteforcelist.txt -ac -mc 200,302,403
 ```
-sometimes i use this fancy crawling tools like Katana to crawl from JS file(I usually look for vulnerable functions or secrets in JS file), I will talk about finding cloud assets when I talk about the **DropBox takeover** and I will talk about how i use Shodan when talking about the **SSRF**.
+sometimes i use this fancy crawling tools like Katana to crawl JS file(I usually look for vulnerable functions or secrets in JS file), I will talk about finding cloud assets when I talk about the **DropBox takeover** and I will talk about how i use Shodan when talking about the **SSRF**.
 
 ###  Finding my first ever RCE with LaTex injection
 
@@ -72,8 +72,12 @@ next i clicked on my first app, added data source and clicked on create new API 
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 this throwed available role
 http://169.254.169.254/latest/meta-data/iam/security-credentials/role
-this throwed temporary acess credential
+this throwed temporary access credential
 ```
 ![](https://preview.redd.it/snsuplzu2h2a1.png?width=785&format=png&auto=webp&s=144f8dd5e27630a56bd3f2fd0d900ca37d4263e2)
 
+I didn't try any post exploitations,ofc i didn't have permission to do or else i would have tried finding some keys in the env variable.
+
 now,lets move to the last part.
+
+
