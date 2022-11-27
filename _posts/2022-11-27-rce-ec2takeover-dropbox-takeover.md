@@ -21,7 +21,7 @@ sometimes i use this fancy crawling tools like Katana to crawl from JS file(I us
 
 ###  Finding my first ever RCE with LaTex injection
 
-LaTeXis a document preparation system for high-quality typesetting. It is most often used for medium-to-large technical or scientific documents but it can be used for almost any form of publishing.LaTeX is based on the idea that it is better to leave document design to document designers, and to let authors get on with writing documents. So, in LaTeX you would input this document as:
+LaTeX is a document preparation system for high-quality typesetting. It is most often used for medium-to-large technical or scientific documents but it can be used for almost any form of publishing.LaTeX is based on the idea that it is better to leave document design to document designers, and to let authors get on with writing documents. So, in LaTeX you would input this document as:
 ```
 \documentclass{article}
 \title{Cartesian closed categories and the price of eggs}
@@ -42,7 +42,7 @@ OUTPUT:
 
 ```
 learn more about LaTex [Here](https://www.latex-project.org/about/)
-So i found a subdomain **https://doctex.proc.xxx.com**, this application had many feature like managing team,importing CSV file,PPT,DOC,TEX,XLSX.when ever i see XlSX first i always try XXE, so as always i tried but this didn't work next i had no idea what is this tex file so i tried learning about latex, while reading a blog post medium i found a article that talks about RCE with latex injection. I started reading about it and i found this [repo](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LaTeX%20Injection) which had payload of latex injection. 
+So i found a subdomain **https://doctex.proc.xxx.com**, this application had many feature like managing team,importing CSV file,PPT,DOC,TEX,XLSX.when ever i see XlSX first i always try XXE, so as always i tried but this didn't work next i had no idea what is this tex file so i tried learning about latex, while reading a blog post on medium i found a article that talks about RCE with latex injection. I started reading about it and i found this [repo](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LaTeX%20Injection) which had payload of latex injection. 
 The application was providing sample .tex file, i downloaded and this extra payload lines in the end.
 ```
 \newread\file
@@ -56,6 +56,8 @@ when i opened the converted pdf file,half of Documents was processed properly bu
 \input|ls|base64
 ```
 this throwed a huge base64 data in the exported pdf and i decoded the base64 and it had response of my **ls** command. I tried some other command with base64
-encoded and it worked. After reading about LaTex for sometime i found out that LaTeX does provide powerful programming features, so application should use industry-standard containerization and virtualization technologies to isolate your project from other projects on the same server.So, this is the end of RCE, next lets talk about the SSRF to EC2 takeover.
+encoded and it worked. 
+
+After reading about LaTex for sometime i found out that LaTeX does provide powerful programming features, so application should use industry-standard containerization and virtualization technologies to isolate your project from other projects on the same server.So, this is the end of RCE, next lets talk about the SSRF to EC2 takeover.
 
 
