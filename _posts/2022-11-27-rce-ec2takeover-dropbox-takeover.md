@@ -17,4 +17,4 @@ I grep subdomains from here first then I use ffuf to bruteforce some new domains
 ```
 root@x71n0:~$ ffuf -u https://FUZZ.xxxx.com -w bruteforcelist.txt -ac -mc 200,302,403
 ```
-
+sometimes i use this fancy crawling tools like Katana to crawl from JS file(I usually look for vulnerable functions or secrets in JS file), I will talk about finding cloud assets when I talk about the **DropBox takeover** , I will talk about how i use Shodan when talking about the **SSRF**.
