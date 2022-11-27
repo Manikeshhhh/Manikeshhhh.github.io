@@ -1,5 +1,5 @@
 ---
-title: RCE,SSRF-to-EC2takeover and dropbox account takeover
+title: SSRF-to-EC2takeover, dropbox account takeover and RCE
 published: true
 ---
 
@@ -80,4 +80,4 @@ I didn't try any post exploitations,ofc i didn't have permission to do or else i
 
 now,lets move to the last part.
 
-
+### DropBox account takeover due to leaked API key in electron JS based desktop Application 
