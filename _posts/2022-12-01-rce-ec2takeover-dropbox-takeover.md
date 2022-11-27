@@ -74,5 +74,5 @@ this throwed available role
 http://169.254.169.254/latest/meta-data/iam/security-credentials/role
 this throwed temporary acess credential
 ```
-![alt text]([https://drive.google.com/file/d/1BEu2Ka4BWAnwulFunjv11OdhSZ5Rpcxd/view](https://preview.redd.it/snsuplzu2h2a1.png?width=785&format=png&auto=webp&s=144f8dd5e27630a56bd3f2fd0d900ca37d4263e2))
+![]([https://drive.google.com/file/d/1BEu2Ka4BWAnwulFunjv11OdhSZ5Rpcxd/view](https://preview.redd.it/snsuplzu2h2a1.png?width=785&format=png&auto=webp&s=144f8dd5e27630a56bd3f2fd0d900ca37d4263e2)
 now,lets move to the last part.
