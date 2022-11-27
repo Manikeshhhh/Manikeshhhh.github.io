@@ -21,11 +21,13 @@ sometimes i use this fancy crawling tools like Katana to crawl JS file(I usually
 
 
 ###  SSRF to EC2 takeover
-Here I will also talk about how i found this IP with shodan and how i proceeded further. I couldn't find much stuffs then i went to shodan and searched for this on search-bar
+Here I will also talk about how i found this IP with shodan and how i proceeded further.
+
+I couldn't find much stuffs initally so then i went to shodan and used this dork
 ```
 Ssl.cert.subject.CN:"domain.com" 200
 ```
-I found several IP,so Initially started with port scan and i confirmed that the IP belongs to org by checking the CNAME records. I saw that APPSMITH was running on 443 with a version released 9 months ago. I recently read blogpost about a ssrf in Appsmith by DNS rebinding [CVE-2022-4096](https://basu-banakar.medium.com/ssrf-via-dns-rebinding-cve-2022-4096-b7bf75928bb2), This application was using very old version of APPsmith so there was no need of DNS rebinding. 
+I found several IP,so Initially started with port scan and i confirmed that the IP belongs to org by checking the CNAME records. I saw that APPSMITH was running on 443 with a version released 6 months ago. I recently read blogpost about a ssrf in Appsmith by DNS rebinding [CVE-2022-4096](https://basu-banakar.medium.com/ssrf-via-dns-rebinding-cve-2022-4096-b7bf75928bb2), This application was using old version of APPsmith so there was no need of DNS rebinding. 
 So initially i saw the registration was allowed, the url looked like this ( https://192.168.143.12/user/login), i created a account and there was no verification needed.
 next i clicked on my first app, added data source and clicked on create new API next added this to url and clicekd on run
 ```
@@ -52,7 +54,7 @@ using this i found 2 open s3 buckets
 domain-archive.s3..amazonaws.com    
 domain-devapps.s3.amazonaws.com
 ```
-the first one just had list permission enabled, it didn't let me download or read files, the second had lots of electron js aplication.There were all the version of the application,from v0.01 to still in development applications. first i tried to check if this application were available to public but i couldn't find any available desktop application publically so i assumed it was used internally. Next i downloaded the few older version,present version and beta version. I was little bit familiar with electron JS application testing but I didn't try to find XSS yet but i found out that all version had node-integration set to True with sandbox set to false,so incase i find a xss in future, it can easily be escalated to RCE.
+the first one just had list permission enabled, it didn't let me download or read files, the second had lots of electron js appication.There were all the version of the application,from v0.01 to still in development applications. first i tried to check if this application were available to public but i couldn't find any available desktop application publically so i assumed it was used internally. Next i downloaded the few older version,present version and beta version. I was little bit familiar with electron JS application testing but I didn't try to find XSS yet but i found out that all version had node-integration set to True with sandbox set to false,so incase i find a xss in future, it can easily be escalated to RCE.
 
 so, after i Downloaded the beta application, I installed the application. It was asking for authentication next I found the app.asar file and unpacked the asar file, you can use the ASAR package from npm to unpack.
 ```
@@ -60,9 +62,15 @@ so, after i Downloaded the beta application, I installed the application. It was
 ```
 i found this files after unpacking the beta application, i started reading JS files to find something.
 ![image](https://user-images.githubusercontent.com/88855149/204139614-a081c7af-a681-4459-9adb-293d612937ae.png)
+
+
 then i found this in the main.js file
+
+
 ![image](https://user-images.githubusercontent.com/88855149/204140355-85dddf35-ca8a-4c20-9a21-73060cba452c.png)
-I immediately went to read zendesk documentation to see how to check the key and yes this key was still vallid. Now lets move to RCE
+
+
+I immediately went to read zendesk documentation to see how to use the key and yes this key was still valid,I stopped here. Now lets move to RCE
 
 ###  Finding my first ever RCE with LaTex injection
 
@@ -103,7 +111,8 @@ when i opened the converted pdf file,half of Documents was processed properly bu
 this throwed a huge base64 data in the exported pdf and i decoded the base64 and it had response of my **ls** command. I tried some other command with base64
 encoded and it worked. 
 
-After reading about LaTex for sometime i found out that LaTeX does provide powerful programming features, so application should use industry-standard containerization and virtualization technologies to isolate your project from other projects on the same server.So, this is the end of RCE Part.
+After reading about LaTex for sometime i found out that LaTeX does provide powerful programming features, so application should use industry-standard containerization and virtualization technologies to isolate projects from other projects on the same server so this prevent further exploitation of RCE.
+So, this is the end of Blog post.
 
 
 Thank you for taking your time to read my Blog,
