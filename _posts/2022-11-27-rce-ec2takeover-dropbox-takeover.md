@@ -60,4 +60,6 @@ encoded and it worked.
 
 After reading about LaTex for sometime i found out that LaTeX does provide powerful programming features, so application should use industry-standard containerization and virtualization technologies to isolate your project from other projects on the same server.So, this is the end of RCE, next lets talk about the SSRF to EC2 takeover.
 
+###  SSRF to EC2 takeover
+Here I will also talk about how i found this IP with shodan and how i proceeded further.
 
