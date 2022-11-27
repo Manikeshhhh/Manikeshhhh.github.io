@@ -4,7 +4,7 @@ published: true
 ---
 
 ### privilege escalation from User to Owner due to Mass assignment issue 
-**Published on 24-Nov-2023**
+**Published on 24-Nov-2022**
 
 This is a issue I found few months back on a program which was sadly duplicate.
 
