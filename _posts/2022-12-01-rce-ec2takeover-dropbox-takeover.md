@@ -61,5 +61,18 @@ encoded and it worked.
 After reading about LaTex for sometime i found out that LaTeX does provide powerful programming features, so application should use industry-standard containerization and virtualization technologies to isolate your project from other projects on the same server.So, this is the end of RCE, next lets talk about the SSRF to EC2 takeover.
 
 ###  SSRF to EC2 takeover
-Here I will also talk about how i found this IP with shodan and how i proceeded further.
-
+Here I will also talk about how i found this IP with shodan and how i proceeded further. I couldn't find much stuffs then i went to shodan and searched for this on search-bar
+```
+Ssl.cert.subject.CN:"domain.com" 200
+```
+I found several IP,so Initially started with port scan and i confirmed that the IP belongs to org by checking the CNAME records. I saw that APPSMITH was running on 443 with a version released 9 months ago. I recently read blogpost about a ssrf in Appsmith by DNS rebinding [CVE-2022-4096](https://basu-banakar.medium.com/ssrf-via-dns-rebinding-cve-2022-4096-b7bf75928bb2), This application was using very old version of APPsmith so there was no need of DNS rebinding. 
+So initially i saw the registration was allowed, the url looked like this ( https://192.168.143.12/user/login), i created a account and there was no verification needed.
+next i clicked on my first app, added data source and clicked on create new API next added this to url and clicekd on run
+```
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+this throwed available role
+http://169.254.169.254/latest/meta-data/iam/security-credentials/role
+this throwed temporary acess credential
+```
+![alt text](https://drive.google.com/file/d/1BEu2Ka4BWAnwulFunjv11OdhSZ5Rpcxd/view)
+now,lets move to the last part.
