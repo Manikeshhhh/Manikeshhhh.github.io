@@ -1,7 +1,7 @@
 ---
-title: RCE,SSRF-to-Ec2takeover and dropbox account takeover due to leaked API Key
+title: RCE,SSRF-to-Ec2takeover and dropbox account takeover
 published: true
 ---
 
-### RCE,SSRF-to-Ec2takeover and dropbox account takeover due to leaked API Key 
+### RCE,SSRF-to-Ec2takeover and dropbox account takeover
 **Published on 27-Nov-2022**
