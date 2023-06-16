@@ -16,9 +16,9 @@ There are several types of caches for e.g. :
 
 1. **Memory Cache**
 
-  Primary Cache L1
-  Secondary Cache L2
-  Main Memory L3 Cache
+  - Primary Cache L1
+  - Secondary Cache L2
+  - Main Memory L3 Cache
 
 Some of these caches work directly with your device’s central processing unit (CPU). Others are external caches that store data away from the CPU but allow for easy access when needed. But all focus on caching data that your device requires to run quickly and correctly.
 
@@ -101,3 +101,6 @@ Referer: https://google.com/
 Cookie: jessionid=xyz;
 Connection: close
 ```
+Caches tackle this problem using the concept of cache keys – a few specific components of a HTTP request that are taken to fully identify the resource being requested. In the request above, I've highlighted the values included in a typical cache key in orange/underline/Italic
+
+This means that caches think the following two requests are equivalent, and will happily respond to the second request with a response cached from the first:
