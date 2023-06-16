@@ -79,7 +79,7 @@ Certain content lends itself more readily to caching than others. Some very cach
 
 Some companies choose to host their own cache using software such as Varnish, while others opt to rely on a Content Delivery Network (CDN) like Cloudflare, which has distributed caches across geographical locations. Additionally, some popular web applications and frameworks like Drupal have built-in caching functionality. 
 
-**Note: From here I will be using some part of explanation from James kettle research research paper from 2018 because he has done excellent Job explaining Few key points. **
+**Note: From here I will be using some part of explanation from James kettle research paper from 2018 because he has done excellent Job explaining Few key points.**
 
 ### What are cache keys:
 
@@ -131,7 +131,7 @@ Cache Poisoning refers to when a user sends a request which causes harmful/malic
 ![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/38a527c6-d199-480f-a3b6-101319e6770d)
 credits: Hackmanit
 
-In the above diagram case, the referral parameter is vulnerable to RXSS and referral header is also not the part of unkeyed, hence it won’t being considered while serving to other potential users of the application. If proper defense does not exist this can also cause mass account takeover in the application.
+In the above diagram case, the referral parameter is vulnerable to RXSS and referral header is also not the part of unkeyed, hence it won’t be considered while serving to other potential users of the application. If proper defense does not exist this can also cause mass account takeover in the application.
 
 ### Exploiting web cache poisoning:
 
