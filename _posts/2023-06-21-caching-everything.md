@@ -60,8 +60,7 @@ Web caching works by caching the HTTP responses for requests according to certai
 In simple terms, a caching server acts as a middleman between your browser and the application server. Its job is to store a copy of the files that the application server provides to users and then deliver those files directly to the user when requested, without involving the application server every time.
 
 This diagrams shows how web caches works:
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e28037e4-190b-4def-9171-674d12120e54/Untitled.png)
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/6fec4a4e-42ab-49b8-8b54-4d2c9980be7a)
 credits: Port-swigger
  The caching server works like a temporary storage unit, holding commonly accessed files to make future requests faster and reduces the load on application server.
  
@@ -84,7 +83,7 @@ Some companies choose to host their own cache using software such as Varnish, wh
 
 ### What are cache keys:
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b2b2c3ee-580d-4f92-8141-1a27adf0627b/Untitled.png)
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/e612c5a5-8a25-44c3-9fa8-72465b7bdd4f)
 
 The concept of caching might sound clean and simple, but it hides some risky assumptions. Whenever a cache receives a request for a resource, it needs to decide whether it has a copy of this exact resource already saved and can reply with that, or if it needs to forward the request to the application server.
 
@@ -101,6 +100,40 @@ Referer: https://google.com/
 Cookie: jessionid=xyz;
 Connection: close
 ```
-Caches tackle this problem using the concept of cache keys – a few specific components of a HTTP request that are taken to fully identify the resource being requested. In the request above, I've highlighted the values included in a typical cache key in orange/underline/Italic
+Caches tackle this problem using the concept of cache keys – a few specific components of a HTTP request that are taken to fully identify the resource being requested. In the request above, I've highlighted the values included in a typical cache key in marked with star.
 
 This means that caches think the following two requests are equivalent, and will happily respond to the second request with a response cached from the first:
+
+```
+*GET /blog/post.php?mobile=1 HTTP/1.1
+Host: example.com*
+User-Agent: Mozilla/5.0 … Firefox/57.0
+Cookie: language=pl;
+Connection: close
+```
+
+```
+GET /blog/post.php?mobile=1 HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 … Firefox/57.0
+Cookie: language=en;
+Connection: close
+```
+As a result, the page will be served in the wrong language to the second visitor. This hints at the problem – any difference in the response triggered by an unkeyed input may be stored and served to other users. In theory, sites can use the 'Vary' response header to specify additional request headers that should be keyed. in practice, the Vary header is only used in a rudimentary way, CDNs like Cloudflare ignore it outright, and people don't even realize their application supports any header-based input.
+
+This causes a healthy number of accidental breakages, but the fun really starts when someone intentionally sets out to exploit it.
+
+
+### Now let’s talk about the research Topic:  Cache poisoning
+
+Cache Poisoning refers to when a user sends a request which causes harmful/malicious response being cached into the server and being served to other users of the application 
+
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/38a527c6-d199-480f-a3b6-101319e6770d)
+credits: Hackmanit
+
+In the above diagram case, the referral parameter is vulnerable to RXSS and referral header is also not the part of unkeyed, hence it won’t being considered while serving to other potential users of the application. If proper defense does not exist this can also cause mass account takeover in the application.
+
+### Exploiting web cache poisoning:
+
+Not yet completed.....................
+
