@@ -113,8 +113,8 @@ Connection: close
 ```
 
 ```
-GET /blog/post.php?mobile=1 HTTP/1.1
-Host: example.com
+*GET /blog/post.php?mobile=1 HTTP/1.1
+Host: example.com*
 User-Agent: Mozilla/5.0 … Firefox/57.0
 Cookie: language=en;
 Connection: close
