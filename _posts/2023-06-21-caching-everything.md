@@ -6,6 +6,16 @@ published: true
 ### Description
 In this comprehensive article, we will explore the fascinating topic of Web cache poisoning, delving into the nature of Web caches and their potential vulnerabilities for exploitation. With real-world examples as our guide, we will uncover the intricacies of this subject and shed light on various techniques to exploit Web caches effectively.Throughout the article, we will examine notable case studies and provide insights into bypassing certain technologies like Cloudflare, AKAMAI, and Cloudfront.For this article I will take a alot of reference from James kettle research papers.
 
+### Content:
+
+- Fundamentals and Terminologies
+- How web caches work
+- what are cache keys
+- Methodologies
+- Taking some well known reports as example
+- resource to learn
+- well formatted 65 web caches reports for your reference
+- reference
 
 ### Fundamentals and Terminologies:
 
