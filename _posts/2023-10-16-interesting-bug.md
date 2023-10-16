@@ -4,9 +4,9 @@ published: true
 ---
 
 ### Description
-I will keep it simple because the Vulnerability is pretty straight forward, It was the exploitation and impact which was interesting. The impact of the issue was critical because it was impacting the admins of the organization. This was on one of the sony assets, I don't have full discloser permission so i will be masking some of the details in this blog.
+I will keep it simple because the Vulnerability is pretty straight forward, It was the exploitation and impact which was interesting. The impact of the issue was critical because it was impacting the admins of the organization. This was on one of the sony assets, I don't have full disclosure permission so i will be masking some of the details in this blog.
 
-I could have uploaded link to my phising page or could have hosted malicious links for the organization members to download, which would have serious impact.
+I could have uploaded link to my phising page or could have hosted malicious links for the organization members to download, which would have had serious impact.
 
 For POC purpose, This is what the user would see if he would have visited any page that does not exist in the application.
 
@@ -22,11 +22,11 @@ After all this i was trying to go through my logs once again before going to bed
 
 ### Exploitation
 
-so, while i was going through the request, I found another **JS file** in the logs, so i started going through the JS code and I found that on error the application was serving a page from a s3 bucket. So, I tried to visit the url to check if a open s3 bucket or do i have any other permission on the application but on visiting the **s3 bucket** url refrenced in the Js file i was served a bucket not exist page.
+so, while i was going through the request, I found another **JS file** in the logs, so i started going through the JS code and I found that on error the application was serving a page from a s3 bucket. So, I tried to visit the url to check if a open s3 bucket or do i have any other permission on the bucket but on visiting the **s3 bucket** url refrenced in the Js file i was served a bucket not exist page.
 
 ![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/30c51a72-11d7-4471-a545-02101329b494)
 
-so immediately i found a created a **s3 bucket with same name and region** and removed all the authentication from my s3 bucket and made it open so the application will be able to load it without any problem. I added the same folders and then the file with same name and created the bucket.
+so immediately i created a **s3 bucket with same name and region** and removed all the authentication from my s3 bucket and made it open so the application will be able to load it without any problem. I added the same folders and then the file with same name and created the bucket.
 
 Now when i tried going to the any non existent page on the application, I was able to see this page.
 
