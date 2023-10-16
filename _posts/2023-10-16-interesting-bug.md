@@ -50,10 +50,10 @@ Now when i tried going to the any non existent page on the application, I was ab
 
 ## Timeline
 
-reported -  17-07-23
-Triaged  -  21-07-23
-Resolved -  20-08-23
-Awarded with swag -  25-08-23
+- reported -  17-07-23
+- Triaged  -  21-07-23
+- Resolved -  20-08-23
+- Awarded with swag -  25-08-23
 
 ### takeaway 
 This incident serves as a stark reminder of the importance of thorough security assessments and continuous monitoring. 
