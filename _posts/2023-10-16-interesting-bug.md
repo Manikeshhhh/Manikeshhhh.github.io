@@ -10,7 +10,8 @@ I could have uploaded link to my phising page or could have hosted malicious lin
 
 For POC purpose, This is what the user would see if he would have visited any page that does not exist in the application.
 
-## Upload image here of poc
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/4cd84816-05c7-4f39-81d2-67759b739659)
+
 
 
 ### Thinking Process 
@@ -23,13 +24,15 @@ After all this i was trying to go through my logs once again before going to bed
 
 so, while i was going through the request, I found another **JS file** in the logs, so i started going through the JS code and I found that on error the application was serving a page from a s3 bucket. So, I tried to visit the url to check if a open s3 bucket or do i have any other permission on the application but on visiting the **s3 bucket** url refrenced in the Js file i was served a bucket not exist page.
 
-## image of not existing apge
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/30c51a72-11d7-4471-a545-02101329b494)
 
 so immediately i found a created a **s3 bucket with same name and region** and removed all the authentication from my s3 bucket and made it open so the application will be able to load it without any problem. I added the same folders and then the file with same name and created the bucket.
 
 Now when i tried going to the any non existent page on the application, I was able to see this page.
 
-## image of poc
+![image](https://github.com/Manikeshhhh/Manikeshhhh.github.io/assets/88855149/b801ed8a-a829-46ab-acfc-d26d1038c74a)
+
+
 
 
 ### Impact 
